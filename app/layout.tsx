@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-// import { Inter } from "next/font/google";
+import { SessionProvider } from "next-auth/react"
+
 import { Poppins } from "next/font/google";
 import "./globals.css";
+import SessionWrapper from "@/components/SessionWrapper";
 
-// const inter = Inter({ subsets:["latin"]  })
 const poppins = Poppins({ 
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
@@ -20,9 +21,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  
   return (
-    <html lang="en">
-      <body className={poppins.className}>{children}</body>
-    </html>
+    <SessionWrapper>
+      <html lang="en">
+        <body className={poppins.className}>{children}</body>
+      </html>
+    </SessionWrapper>
   );
 }
